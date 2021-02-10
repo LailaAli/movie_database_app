@@ -1,1 +1,1 @@
-trailer_streaming_app
+movie_database_app

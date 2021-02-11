@@ -1,1 +1,1 @@
-movie_database_app
+preview_app

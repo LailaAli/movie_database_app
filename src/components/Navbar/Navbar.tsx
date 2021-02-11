@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import css from "./Navbar.module.scss";
 import classes from "classnames";
+import { ReactComponent as Logo } from "../../assets/logo-13.svg";
 
 export const Navbar = () => {
    const [handleShow, setHandleshow] = useState(false);
@@ -18,11 +19,7 @@ export const Navbar = () => {
    }, []);
    return (
       <div className={classes(css.nav, handleShow && css.background)}>
-         <img
-            src="https://www.freelogodesign.org/Content/img/logo-samples/flooop.png"
-            alt=""
-            className={css.logo}
-         />
+         <Logo className={css.logo} />
       </div>
    );
 };

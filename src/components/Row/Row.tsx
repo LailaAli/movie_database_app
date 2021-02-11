@@ -45,7 +45,6 @@ export const Row: React.FC<IRow> = (props) => {
                setTrailerUrl(urlParams.get("v"));
             })
             .catch((error: string) => console.log(error));
-         console.log(trailerUrl);
       }
    };
 

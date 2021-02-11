@@ -3,13 +3,13 @@
    top: 0;
    width: 100%;
    padding: 20px 50px;
-   height: 30px;
+   height: 100px;
    z-index: 1;
 
    &.background {
       transition-timing-function: ease-in;
       transition: all 0.5s;
-      background-color: #111;
+      background-color: #111111e6;
    }
 
    .logo {

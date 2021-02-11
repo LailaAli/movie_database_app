@@ -2,15 +2,21 @@ import React, { useEffect, useState } from "react";
 import css from "./Banner.module.scss";
 import axios from "../../axios";
 import requests from "../../request";
+import YouTube from "react-youtube";
 
-interface IBanner {
-   title: string;
-   onClick: () => void;
-   description: string;
-}
+const movieTrailer = require("movie-trailer");
+
+const opts: any = {
+   height: "390",
+   width: "100%",
+   playerVars: {
+      autoplay: 1,
+   },
+};
 
 export const Banner: React.FC = (props) => {
    const [movie, setMovie] = useState<any>([]);
+   const [trailerUrl, setTrailerUrl] = useState<any>("");
 
    useEffect(() => {
       async function fetchData() {
@@ -25,7 +31,18 @@ export const Banner: React.FC = (props) => {
       fetchData();
    }, []);
 
-   console.log(movie);
+   const handleClick = (movie: any) => {
+      if (trailerUrl) {
+         setTrailerUrl("");
+      } else {
+         movieTrailer(movie?.title || "")
+            .then((url: any) => {
+               const urlParams = new URLSearchParams(new URL(url).search);
+               setTrailerUrl(urlParams.get("v"));
+            })
+            .catch((error: string) => console.log(error));
+      }
+   };
 
    return (
       <>
@@ -43,12 +60,19 @@ export const Banner: React.FC = (props) => {
                </h1>
                <button
                   className={css.button}
-                  onClick={() => console.log("click")}
+                  onClick={() => handleClick(movie)}
                >
                   Play
                </button>
                <p className={css.description}>{movie?.overview}</p>
             </div>
+            {trailerUrl && (
+               <YouTube
+                  videoId={trailerUrl}
+                  opts={opts}
+                  className={css.trailer}
+               />
+            )}
          </header>
          <div className={css.fadeBottom}></div>
       </>

@@ -3,8 +3,12 @@ import css from "./App.module.scss";
 import { Row } from "./components/Row/Row";
 import requests from "./request";
 
-const rowTitles = [
-   { title: "Now Playing", fetchUrl: requests.fetchNowPlaying },
+const rowData = [
+   {
+      title: "Now Playing",
+      fetchUrl: requests.fetchNowPlaying,
+      isRowLarge: true,
+   },
    { title: "Upcoming", fetchUrl: requests.fetchUpcoming },
    { title: "Popular", fetchUrl: requests.fetchPopular },
    { title: "Top Rated", fetchUrl: requests.fetchTopRated },
@@ -23,10 +27,11 @@ export const App = () => {
    return (
       <div className={css.app}>
          <div className={css.moviesDisplay}>
-            {rowTitles.map((item) => (
+            {rowData.map((item) => (
                <Row
                   title={item.title}
                   fetchUrl={item.fetchUrl}
+                  isRowLarge={item.isRowLarge}
                   key={item.title}
                />
             ))}

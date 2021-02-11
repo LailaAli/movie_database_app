@@ -1,7 +1,9 @@
 import React from "react";
 import css from "./App.module.scss";
+import { Banner } from "./components/Banner/Banner";
 import { Row } from "./components/Row/Row";
 import requests from "./request";
+import { Navbar } from "./components/Navbar/Navbar";
 
 const rowData = [
    {
@@ -26,6 +28,8 @@ const rowData = [
 export const App = () => {
    return (
       <div className={css.app}>
+         <Navbar />
+         <Banner title="" onClick={() => console.log("click")} description="" />
          <div className={css.moviesDisplay}>
             {rowData.map((item) => (
                <Row

@@ -48,6 +48,11 @@ export const Row: React.FC<IRow> = (props) => {
       }
    };
 
+   const onEnd = (event: any) => {
+      // access to player in all event handlers via event.target
+      event.target.destroy();
+   };
+
    return (
       <div className={css.row}>
          <h2 className={css.rowTitle}>{title}</h2>
@@ -81,7 +86,9 @@ export const Row: React.FC<IRow> = (props) => {
                </div>
             ))}
          </div>
-         {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
+         {trailerUrl && (
+            <YouTube videoId={trailerUrl} opts={opts} onEnd={onEnd} />
+         )}
       </div>
    );
 };

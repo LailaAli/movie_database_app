@@ -14,6 +14,11 @@ const opts: any = {
    },
 };
 
+const onEnd = (event: any) => {
+   // access to player in all event handlers via event.target
+   event.target.destroy();
+};
+
 export const Banner: React.FC = (props) => {
    const [movie, setMovie] = useState<any>([]);
    const [trailerUrl, setTrailerUrl] = useState<any>("");
@@ -71,6 +76,7 @@ export const Banner: React.FC = (props) => {
                   videoId={trailerUrl}
                   opts={opts}
                   className={css.trailer}
+                  onEnd={onEnd}
                />
             )}
          </header>

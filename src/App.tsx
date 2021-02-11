@@ -29,7 +29,7 @@ export const App = () => {
    return (
       <div className={css.app}>
          <Navbar />
-         <Banner title="" onClick={() => console.log("click")} description="" />
+         <Banner />
          <div className={css.moviesDisplay}>
             {rowData.map((item) => (
                <Row

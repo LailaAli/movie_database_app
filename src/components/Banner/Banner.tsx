@@ -9,9 +9,7 @@ interface IBanner {
    description: string;
 }
 
-export const Banner: React.FC<IBanner> = (props) => {
-   const { title, onClick, description } = props;
-
+export const Banner: React.FC = (props) => {
    const [movie, setMovie] = useState<any>([]);
 
    useEffect(() => {
@@ -43,7 +41,10 @@ export const Banner: React.FC<IBanner> = (props) => {
                <h1 className={css.title}>
                   {movie?.title || movie?.name || movie?.original_name}
                </h1>
-               <button className={css.button} onClick={onClick}>
+               <button
+                  className={css.button}
+                  onClick={() => console.log("click")}
+               >
                   Play
                </button>
                <p className={css.description}>{movie?.overview}</p>

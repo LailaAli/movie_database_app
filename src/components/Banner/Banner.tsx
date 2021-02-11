@@ -14,14 +14,10 @@ const opts: any = {
    },
 };
 
-const onEnd = (event: any) => {
-   // access to player in all event handlers via event.target
-   event.target.destroy();
-};
-
 export const Banner: React.FC = (props) => {
    const [movie, setMovie] = useState<any>([]);
    const [trailerUrl, setTrailerUrl] = useState<any>("");
+   const [toggleTrailer, setToggleTrailer] = useState<boolean>(true);
 
    useEffect(() => {
       async function fetchData() {
@@ -39,14 +35,22 @@ export const Banner: React.FC = (props) => {
    const handleClick = (movie: any) => {
       if (trailerUrl) {
          setTrailerUrl("");
+         setToggleTrailer(true);
       } else {
          movieTrailer(movie?.title || "")
             .then((url: any) => {
                const urlParams = new URLSearchParams(new URL(url).search);
                setTrailerUrl(urlParams.get("v"));
+               setToggleTrailer(false);
             })
             .catch((error: string) => console.log(error));
       }
+   };
+
+   const onEnd = (event: any) => {
+      // access to player in all event handlers via event.target
+      event.target.destroy();
+      setToggleTrailer(true);
    };
 
    return (
@@ -67,7 +71,7 @@ export const Banner: React.FC = (props) => {
                   className={css.button}
                   onClick={() => handleClick(movie)}
                >
-                  Play
+                  {toggleTrailer ? "Play" : "Close trailer"}
                </button>
                <p className={css.description}>{movie?.overview}</p>
             </div>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import css from "./Row.module.scss";
 import classes from "classnames";
 import axios from "../../axios";
+import YouTube from "react-youtube";
+// import movieTrailer from 'movie-trailer';
 
 interface IRow {
    title: string;
@@ -11,9 +13,18 @@ interface IRow {
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
+const opts: any = {
+   height: "390",
+   width: "100%",
+   playerVars: {
+      autoplay: 0,
+   },
+};
+
 export const Row: React.FC<IRow> = (props) => {
    const { title, fetchUrl, isRowLarge } = props;
    const [movies, setMovies] = useState([]);
+   const [trailerUrl, setTrailerUrl] = useState<string | null>(null);
    useEffect(() => {
       async function fetchData() {
          const request = await axios.get(fetchUrl);
@@ -22,6 +33,19 @@ export const Row: React.FC<IRow> = (props) => {
       }
       fetchData();
    }, []);
+
+   // const handleClick = (movie: any) => {
+   //    if (trailerUrl) {
+   //       setTrailerUrl(null);
+   //    } else {
+   //       movieTrailer(movie?.name || null)
+   //          .then((url: string) => {
+   //             const urlParams = new URLSearchParams(new URL(url).search);
+   //             setTrailerUrl(urlParams.get("v"));
+   //          })
+   //          .catch((error: string) => console.log(error));
+   //    }
+   // };
 
    return (
       <div className={css.row}>
@@ -40,6 +64,7 @@ export const Row: React.FC<IRow> = (props) => {
                            src={`${base_url}${movie.poster_path}`}
                            alt={movie.name}
                            className={css.posterImage}
+                           // onClick={() => handleClick(movie)}
                         />
                      </div>
                   </div>
@@ -55,6 +80,7 @@ export const Row: React.FC<IRow> = (props) => {
                </div>
             ))}
          </div>
+         {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
       </div>
    );
 };

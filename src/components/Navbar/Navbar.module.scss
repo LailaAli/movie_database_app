@@ -2,9 +2,10 @@
    position: fixed;
    top: 0;
    width: 100%;
-   padding: 20px 50px;
-   height: 100px;
+   height: 80px;
    z-index: 1;
+   padding: 15px 0;
+   text-align: right;
 
    &.background {
       transition-timing-function: ease-in;
@@ -13,7 +14,8 @@
    }
 
    .logo {
-      height: 100px;
+      height: 70px;
       width: auto;
+      padding-right: 30px;
    }
 }
